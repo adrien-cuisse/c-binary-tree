@@ -1,0 +1,10 @@
+
+# IDE junk
+.idea
+.vscode
+
+# Object files
+**/obj/*
+
+# Binaries
+**/bin/*
