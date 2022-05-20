@@ -26,7 +26,7 @@ Test(binary_tree, constructor_allocates_memory)
 }
 
 
-Test(binary_tree, stores_given_value)
+Test(binary_tree, constructor_stores_given_value)
 {
     // when storing a value in an element
     char * value = "root";
@@ -41,7 +41,7 @@ Test(binary_tree, stores_given_value)
 }
 
 
-Test(binary_tree, destructor_doesnt_crash_when_instance_is_null)
+Test(binary_tree, destructor_doesnt_crash_when_tree_is_null)
 {
     // given a null tree
     _BinaryTree * tree = NULL;
@@ -69,7 +69,7 @@ Test(binary_tree, destructor_frees_memory)
 }
 
 
-Test(binary_tree, destructor_doesnt_affect_value)
+Test(binary_tree, destructor_doesnt_affect_stored_value)
 {
     // given a value
     char * value = "some important data";
@@ -103,7 +103,7 @@ Test(binary_tree, null_trees_dont_contain_values)
 }
 
 
-Test(binary_tree, finds_root_value)
+Test(binary_tree, finds_value_when_its_root)
 {
     // given a tree with a value
     _BinaryTree * tree = BinaryTree->constructor("root", STRING_NODE_COMPARISON_CALLBACK);
@@ -120,7 +120,7 @@ Test(binary_tree, finds_root_value)
 }
 
 
-Test(binary_tree, finds_added_lesser_values)
+Test(binary_tree, finds_value_when_its_lesser_than_root)
 {
     // given a tree with a value added in a later node
     _BinaryTree * tree = BinaryTree->constructor("42", STRING_NODE_COMPARISON_CALLBACK);
@@ -138,7 +138,7 @@ Test(binary_tree, finds_added_lesser_values)
 }
 
 
-Test(binary_tree, finds_added_greater_values)
+Test(binary_tree, finds_value_when_its_greater_than_root)
 {
     // given a tree with a value added in a later node
     _BinaryTree * tree = BinaryTree->constructor("42", STRING_NODE_COMPARISON_CALLBACK);
@@ -226,24 +226,6 @@ Test(binary_tree, computes_height_from_lesser_value_nodes)
 }
 
 
-Test(binary_tree, computes_height_from_equal_value_nodes)
-{
-    // given a tree with an added equal value
-    _BinaryTree * root = BinaryTree->constructor("42", STRING_NODE_COMPARISON_CALLBACK);
-    BinaryTree->add(root, "42");
-
-    // when checking its height
-    int height = BinaryTree->height(root);
-
-    // then it should be 2
-    cr_assert_eq(
-        2,
-        height,
-        "Height should be computed from equal-value nodes"
-    );
-}
-
-
 Test(binary_tree, computes_height_from_greater_value_nodes)
 {
     // given a tree with an added greater value
@@ -262,7 +244,7 @@ Test(binary_tree, computes_height_from_greater_value_nodes)
 }
 
 
-Test(binary_tree, height_is_lesser_values_chain)
+Test(binary_tree, computes_biggest_height_when_its_lesser_than_root)
 {
     // given a tree with a root, a chain of "lesser-values" of length 2, a chain of "greater-values" of length 1
     _BinaryTree * root = BinaryTree->constructor("3", STRING_NODE_COMPARISON_CALLBACK);
@@ -282,7 +264,7 @@ Test(binary_tree, height_is_lesser_values_chain)
 }
 
 
-Test(binary_tree, height_is_greater_values_chain)
+Test(binary_tree, computes_biggest_height_when_its_greater_than_root)
 {
     // given a tree with a root, a chain of "greater-values" of length 2, a chain of "lesser-values" of length 1
     _BinaryTree * root = BinaryTree->constructor("1", STRING_NODE_COMPARISON_CALLBACK);
@@ -383,7 +365,7 @@ Test(binary_tree, detaches_nothing_in_null_tree)
 }
 
 
-Test(binary_tree, has_no_effect_on_root)
+Test(binary_tree, detaching_has_no_effect_on_root)
 {
     // given a tree made of only its root
     _BinaryTree * root = BinaryTree->constructor("root", STRING_NODE_COMPARISON_CALLBACK);
@@ -411,7 +393,7 @@ Test(binary_tree, null_tree_has_no_root)
 }
 
 
-Test(binary_tree, finds_root_of_tree)
+Test(binary_tree, finds_root_from_any_node)
 {
     // given a tree with more than 1 value
     _BinaryTree * tree = BinaryTree->constructor("root", STRING_NODE_COMPARISON_CALLBACK);
@@ -732,7 +714,7 @@ static void addVisitedNodeCallback(void const * const value)
 }
 
 
-Test(binary_tree, mapping_pre_order_visits_node_with_pre_order, .init=addVisitedNodeCallbackSetup)
+Test(binary_tree, mapping_with_pre_order_visits_node_with_pre_order, .init=addVisitedNodeCallbackSetup)
 {
     // given a tree with several nodes
     _BinaryTree * tree = BinaryTree->constructor("F", STRING_NODE_COMPARISON_CALLBACK);
@@ -757,7 +739,7 @@ Test(binary_tree, mapping_pre_order_visits_node_with_pre_order, .init=addVisited
 }
 
 
-Test(binary_tree, mapping_in_order_visits_node_with_in_order, .init=addVisitedNodeCallbackSetup)
+Test(binary_tree, mapping_with_in_order_visits_node_with_in_order, .init=addVisitedNodeCallbackSetup)
 {
     // given a tree with several nodes
     _BinaryTree * tree = BinaryTree->constructor("F", STRING_NODE_COMPARISON_CALLBACK);
@@ -782,7 +764,7 @@ Test(binary_tree, mapping_in_order_visits_node_with_in_order, .init=addVisitedNo
 }
 
 
-Test(binary_tree, mapping_post_order_visits_node_with_post_order, .init=addVisitedNodeCallbackSetup)
+Test(binary_tree, mapping_with_post_order_visits_node_with_post_order, .init=addVisitedNodeCallbackSetup)
 {
     // given a tree with several nodes
     _BinaryTree * tree = BinaryTree->constructor("F", STRING_NODE_COMPARISON_CALLBACK);
