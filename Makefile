@@ -62,7 +62,7 @@ $(TESTS_BINARIES_DIRECTORY)/%: $(TESTS_SOURCES_DIRECTORY)/%.c
 
 .PHONY: run-tests
 run-tests: tests-binaries
-	for binary in $(TESTS_BINARIES); do ./$$binary; done
+	for binary in $(TESTS_BINARIES); do ./$$binary --verbose; done
 ##
 ## <<<<<<<<<< Tests section <<<<<<<<<<
 ##
