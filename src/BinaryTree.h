@@ -105,6 +105,9 @@ typedef struct
 
 
 
+/**
+ * BinaryTree methods table
+ */
 extern BinaryTreeMethods const * const BinaryTree;
 
 
