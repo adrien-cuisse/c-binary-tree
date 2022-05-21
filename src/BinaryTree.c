@@ -88,7 +88,7 @@ static void const * value(_BinaryTree const * const this)
 }
 
 
-_BinaryTree * findValue(_BinaryTree * const this, void const * const value)
+static _BinaryTree * findValue(_BinaryTree * const this, void const * const value)
 {
     int comparison;
 
@@ -194,7 +194,7 @@ static _BinaryTree * pop(_BinaryTree * const this, void const * const value)
 }
 
 
-void map(_BinaryTree const * const this, void (* callback)(void const * const value), BinaryTreeTraversal traversal)
+static void map(_BinaryTree const * const this, void (* callback)(void const * const value), BinaryTreeTraversal traversal)
 {
     if (this == NULL)
         return;
