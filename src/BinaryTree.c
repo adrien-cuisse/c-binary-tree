@@ -28,6 +28,9 @@ struct _BinaryTree
 static int nodeHasGreaterValue(_BinaryTree const * const this, void const * const value);
 
 
+static int isLeftSon(_BinaryTree const * const this);
+
+
 /**
  * @return - the node whose value is right after this one in the tree
  */
@@ -146,7 +149,7 @@ static _BinaryTree * detachNode(_BinaryTree * const this)
     if (parent == NULL)
         return NULL;
 
-    if (nodeHasGreaterValue(parent, this->value))
+    if (isLeftSon(this))
         parent->leftNode = NULL;
     else
         parent->rightNode = NULL;
@@ -247,6 +250,12 @@ static int nodeHasGreaterValue(_BinaryTree const * const this, void const * cons
 }
 
 
+static int isLeftSon(_BinaryTree const * const this)
+{
+    return (this->parent != NULL) && (this->parent->leftNode == this);
+}
+
+
 static _BinaryTree * successor(_BinaryTree * const this)
 {
     _BinaryTree * successor;
@@ -285,7 +294,7 @@ static _BinaryTree * addValueToTheRight(_BinaryTree * const this, void const * c
 
 static void attachLeftSonToParent(_BinaryTree * const this)
 {
-    if (nodeHasGreaterValue(this->parent, this->value))
+    if (isLeftSon(this))
         this->parent->leftNode = this->leftNode;
     else
         this->parent->rightNode = this->leftNode;
@@ -296,7 +305,7 @@ static void attachLeftSonToParent(_BinaryTree * const this)
 
 static void attachRightSonToParent(_BinaryTree * const this)
 {
-    if (nodeHasGreaterValue(this->parent, this->value))
+    if (isLeftSon(this))
         this->parent->leftNode = this->rightNode;
     else
         this->parent->rightNode = this->rightNode;
@@ -309,7 +318,7 @@ static void replaceNodeWithSuccessor(_BinaryTree * const this)
 {
     _BinaryTree * succeeding = successor(this);
 
-    if (nodeHasGreaterValue(this->parent, this->value))
+    if (isLeftSon(this))
         this->parent->leftNode = succeeding;
     else
         this->parent->rightNode = succeeding;
