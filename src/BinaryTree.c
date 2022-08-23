@@ -204,41 +204,16 @@ static void map(_BinaryTree const * const this, void (* callback)(void const * c
 
     if (traversal == PreOrder)
         callback(this->value);
-    else
-        map(this->leftNode, callback, traversal);
 
-    if (traversal == PreOrder)
-        map(this->leftNode, callback, traversal);
-    else if (traversal == InOrder)
+    map(this->leftNode, callback, traversal);
+
+    if (traversal == InOrder)
         callback(this->value);
-    else
-        map(this->rightNode, callback, traversal);
+
+    map(this->rightNode, callback, traversal);
 
     if (traversal == PostOrder)
         callback(this->value);
-    else
-        map(this->rightNode, callback, traversal);
-
-    /*switch (traversal)
-    {
-        case PreOrder:
-            callback(this->value);
-            map(this->leftNode, callback, traversal);
-            map(this->rightNode, callback, traversal);
-            break;
-        case InOrder:
-            map(this->leftNode, callback, traversal);
-            callback(this->value);
-            map(this->rightNode, callback, traversal);
-            break;
-        case PostOrder:
-            map(this->leftNode, callback, traversal);
-            map(this->rightNode, callback, traversal);
-            callback(this->value);
-            break;
-        default:
-            break;
-    }*/
 }
 
 
